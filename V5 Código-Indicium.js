@@ -14,7 +14,7 @@ function executarAlerta() {
   Logger.log("Data de hoje para comparação: " + hojeString);
 
   const cabecalho = dados[0];
-  // --- DEFINIÇÃO DAS COLUNAS ---
+
   const COL_NOME_AFILHADO = 0;   // Coluna A
   const COL_EMAIL_AFILHADO = 1;    // Coluna B
   const COL_NOME_PADRINHO = 2;     // Coluna C
