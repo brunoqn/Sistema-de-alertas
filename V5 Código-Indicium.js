@@ -19,7 +19,7 @@ function executarAlerta() {
   const COL_EMAIL_AFILHADO = 1;    // Coluna B
   const COL_NOME_PADRINHO = 2;     // Coluna C
   const COL_DATA_ADMISSAO = 6;     // Coluna G
-  const COL_CONCLUSAO_EXPERIENCIA = 16; // Coluna Q <-- AJUSTE REALIZADO AQUI
+  const COL_CONCLUSAO_EXPERIENCIA = 16; // Coluna Q 
   const COL_EMAIL_PADRINHO = 24;   // Coluna Y
   const COL_EMAIL_LIDERANCA = 25;  // Coluna Z
   
@@ -43,7 +43,7 @@ function executarAlerta() {
     const nomeAfilhado = linha[COL_NOME_AFILHADO];
     const emailAfilhado = linha[COL_EMAIL_AFILHADO];
     const dataAdmissao = linha[COL_DATA_ADMISSAO];
-    const dataConclusao = linha[COL_CONCLUSAO_EXPERIENCIA]; // <-- Lendo a data da Coluna Q
+    const dataConclusao = linha[COL_CONCLUSAO_EXPERIENCIA]; 
     const nomePadrinho = linha[COL_NOME_PADRINHO];
     const emailPadrinho = linha[COL_EMAIL_PADRINHO];
     const emailLideranca = linha[COL_EMAIL_LIDERANCA];
@@ -51,7 +51,7 @@ function executarAlerta() {
     const destinatariosAlerta = [emailPadrinho, emailLideranca].filter(e => e && e.toString().trim() !== "");
     const opcoesBcc = { bcc: destinatariosAlerta.join(',') };
     
-    // --- LÓGICA DE PERIODICIDADE COMPLETA ---
+    // --- LÓGICA DE PERIODICIDADE ---
     
     if (datasIguais(dataAdmissao, hojeString, fusoHorario) && !statusAtual.includes("sent_admission")) {
       enviarEmail(emailAfilhado, "Boas-vindas ao Programa de Apadrinhamento Indicium!", criarMensagemBoasVindasAfilhado(nomeAfilhado));
@@ -65,7 +65,7 @@ function executarAlerta() {
       Logger.log('>> Alerta de 30 dias enviado para ' + nomeAfilhado);
 
     } else if (datasIguais(linha[COL_38_DIAS], hojeString, fusoHorario) && !statusAtual.includes("sent_38")) {
-      enviarEmail(seuEmail, '⚠️ Alerta – 38 dias de experiência: ' + nomeAfilhado, criarMensagem38Dias(nomeAfilhado), opcoesBcc);
+      enviarEmail(seuEmail, '📌 Alerta – 38 dias de experiência: ' + nomeAfilhado, criarMensagem38Dias(nomeAfilhado), opcoesBcc);
       enviarEmail(emailAfilhado, "Acompanhamento - 38 dias", "<p>Olá! Chegamos ao marco de 38 dias do seu acompanhamento.</p>");
       planilha.getRange(i + 1, COL_STATUS + 1).setValue(statusAtual + "sent_38; ");
       Logger.log('>> Alerta de 38 dias enviado para ' + nomeAfilhado);
@@ -76,7 +76,7 @@ function executarAlerta() {
       Logger.log('>> Alerta de 75 dias enviado para ' + nomeAfilhado);
 
     } else if (datasIguais(linha[COL_83_DIAS], hojeString, fusoHorario) && !statusAtual.includes("sent_83")) {
-      enviarEmail(seuEmail, '⚠️ Alerta – 83 dias de experiência: ' + nomeAfilhado, criarMensagem83Dias(nomeAfilhado), opcoesBcc);
+      enviarEmail(seuEmail, '📌 Alerta – 83 dias de experiência: ' + nomeAfilhado, criarMensagem83Dias(nomeAfilhado), opcoesBcc);
       enviarEmail(emailAfilhado, "Acompanhamento - 83 dias", "<p>Olá! Chegamos ao marco de 83 dias do seu acompanhamento.</p>");
       planilha.getRange(i + 1, COL_STATUS + 1).setValue(statusAtual + "sent_83; ");
       Logger.log('>> Alerta de 83 dias enviado para ' + nomeAfilhado);
@@ -91,15 +91,13 @@ function executarAlerta() {
   Logger.log("--- Fim da execução ---");
 }
 
-// --- NOVOS MODELOS DE E-MAIL ---
+// --- MODELOS DE E-MAIL EXISTENTES ---
 function criarMensagemBoasVindasAfilhado(nome) { return '<p>Olá <b>' + nome + '</b>,</p><p>Desejamos as boas-vindas oficialmente na Indicium e ao Programa de Apadrinhamento.</p>'; }
 function criarMensagemBoasVindasPadrinho(nomePadrinho, nomeAfilhado) { return '<p>Olá <b>' + nomePadrinho + '</b>,</p><p>Passando para lembrá-lo que o seu/sua afilhado/a <b>' + nomeAfilhado + '</b> iniciou hoje na Indicium.</p>'; }
 function criarMensagemFeedback90Dias(nome) { return '<p>Olá <b>' + nome + '</b>,</p><p>Chegou o momento de avaliar o seu padrinho ou madrinha do Programa de Apadrinhamento.</p><p>Clique no link e envie a sua avaliação.</p><p><a href="https://forms.gle/HooXxTAyrHMj4K8C8">Link para Avaliação</a></p>'; }
-
-// --- MODELOS DE E-MAIL EXISTENTES ---
-function criarMensagem30Dias(nome) { return '<p>📌 Alerta – 30 dias de experiência</p><p>O(a) afilhado(a) <b>' + nome + '</b> está completando 30 dias na Indicium!</p><p>Este é um momento importante para acompanhar a adaptação e os primeiros resultados da jornada.<br>Você tem 8 dias para preencher a 1ª avaliação de experiência na HiBob.</p><p>Em caso de dúvidas sobre o preenchimento, estou à disposição.</p>'; }
+function criarMensagem30Dias(nome) { return '<p>⚠️ Alerta – 30 dias de experiência</p><p>O(a) afilhado(a) <b>' + nome + '</b> está completando 30 dias na Indicium!</p><p>Este é um momento importante para acompanhar a adaptação e os primeiros resultados da jornada.<br>Você tem 8 dias para preencher a 1ª avaliação de experiência na HiBob.</p><p>Em caso de dúvidas sobre o preenchimento, estou à disposição.</p>'; }
 function criarMensagem38Dias(nome) { return '<p>⚠️ Alerta – 38 dias de experiência</p><p>Hoje é o último dia para preencher a 1ª avaliação de experiência na HiBob para o(a) afilhado(a) <b>' + nome + '</b>.</p><p>Essa etapa é essencial para registrar percepções iniciais sobre o desenvolvimento do(a) afilhado(a).</p><p>Caso já tenha finalizado, lembre-se de realizar o feedback de 30 dias com ele(a) antes de completar 45 dias.</p>'; }
-function criarMensagem75Dias(nome) { return '<p>📌 Alerta – 75 dias de experiência</p><p>O(a) afilhado(a) <b>' + nome + '</b> está completando 75 dias na casa!</p><p>Este é o momento de acompanhar a consolidação da performance e o alinhamento com o time e entregas.<br>Você tem 8 dias para preencher a 2ª avaliação de experiência na HiBob.</p><p>Se precisar de apoio, estou por aqui.</p>'; }
+function criarMensagem75Dias(nome) { return '<p>⚠️ Alerta – 75 dias de experiência</p><p>O(a) afilhado(a) <b>' + nome + '</b> está completando 75 dias na casa!</p><p>Este é o momento de acompanhar a consolidação da performance e o alinhamento com o time e entregas.<br>Você tem 8 dias para preencher a 2ª avaliação de experiência na HiBob.</p><p>Se precisar de apoio, estou por aqui.</p>'; }
 function criarMensagem83Dias(nome) { return '<p>⚠️ Alerta – 83 dias de experiência</p><p>Hoje é o último dia para preencher a 2ª avaliação de experiência na HiBob para o(a) afilhado(a) <b>' + nome + '</b>.</p><p>Esse registro é essencial para fechar o ciclo de experiência com visão de desempenho, evolução e integração.</p><p>Caso já tenha finalizado, lembre-se de realizar o feedback final com o afilhado(a) antes de completar 90 dias.</p>'; }
 
 // --- FUNÇÕES AUXILIARES ---
