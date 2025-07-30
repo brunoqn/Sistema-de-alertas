@@ -58,7 +58,7 @@ function executarAlerta() {
       enviarEmail(seuEmail, assunto, corpoHtml, opcoesBcc);
       emailEnviado = true;
     } else if (datasIguais(linha[COL_38_DIAS], hojeString, fusoHorario)) {
-      const assunto = `⚠️ Alerta – 38 dias de experiência: ${nomeAfilhado}`;
+      const assunto = `📌 Alerta – 38 dias de experiência: ${nomeAfilhado}`;
       const corpoHtml = criarMensagem38Dias(nomeAfilhado);
       enviarEmail(seuEmail, assunto, corpoHtml, opcoesBcc);
       enviarEmail(emailAfilhado, "Acompanhamento - 38 dias", "<p>Olá! Chegamos ao marco de 38 dias do seu acompanhamento.</p>");
@@ -69,7 +69,7 @@ function executarAlerta() {
       enviarEmail(seuEmail, assunto, corpoHtml, opcoesBcc);
       emailEnviado = true;
     } else if (datasIguais(linha[COL_83_DIAS], hojeString, fusoHorario)) {
-      const assunto = `⚠️ Alerta – 83 dias de experiência: ${nomeAfilhado}`;
+      const assunto = `📌 Alerta – 83 dias de experiência: ${nomeAfilhado}`;
       const corpoHtml = criarMensagem83Dias(nomeAfilhado);
       enviarEmail(seuEmail, assunto, corpoHtml, opcoesBcc);
       enviarEmail(emailAfilhado, "Acompanhamento - 83 dias", "<p>Olá! Chegamos ao marco de 83 dias do seu acompanhamento.</p>");
@@ -88,13 +88,13 @@ function executarAlerta() {
 
 // --- MODELOS DE E-MAIL (HTML) ---
 function criarMensagem30Dias(nome) {
-  return `<p>📌 Alerta – 30 dias de experiência</p><p>O(a) afilhado(a) <b>${nome}</b> está completando 30 dias na Indicium!</p><p>Este é um momento importante para acompanhar a adaptação e os primeiros resultados da jornada.<br>Você tem 8 dias para preencher a 1ª avaliação de experiência na HiBob.</p><p>Em caso de dúvidas sobre o preenchimento, estou à disposição.</p>`;
+  return `<p>⚠️ Alerta – 30 dias de experiência</p><p>O(a) afilhado(a) <b>${nome}</b> está completando 30 dias na Indicium!</p><p>Este é um momento importante para acompanhar a adaptação e os primeiros resultados da jornada.<br>Você tem 8 dias para preencher a 1ª avaliação de experiência na HiBob.</p><p>Em caso de dúvidas sobre o preenchimento, estou à disposição.</p>`;
 }
 function criarMensagem38Dias(nome) {
     return `<p>⚠️ Alerta – 38 dias de experiência</p><p>Hoje é o último dia para preencher a 1ª avaliação de experiência na HiBob para o(a) afilhado(a) <b>${nome}</b>.</p><p>Essa etapa é essencial para registrar percepções iniciais sobre o desenvolvimento do(a) afilhado(a).</p><p>Caso já tenha finalizado, lembre-se de realizar o feedback de 30 dias com ele(a) antes de completar 45 dias.</p>`;
 }
 function criarMensagem75Dias(nome) {
-  return `<p>📌 Alerta – 75 dias de experiência</p><p>O(a) afilhado(a) <b>${nome}</b> está completando 75 dias na casa!</p><p>Este é o momento de acompanhar a consolidação da performance e o alinhamento com o time e entregas.<br>Você tem 8 dias para preencher a 2ª avaliação de experiência na HiBob.</p><p>Se precisar de apoio, estou por aqui.</p>`;
+  return `<p>⚠️ Alerta – 75 dias de experiência</p><p>O(a) afilhado(a) <b>${nome}</b> está completando 75 dias na casa!</p><p>Este é o momento de acompanhar a consolidação da performance e o alinhamento com o time e entregas.<br>Você tem 8 dias para preencher a 2ª avaliação de experiência na HiBob.</p><p>Se precisar de apoio, estou por aqui.</p>`;
 }
 function criarMensagem83Dias(nome) {
     return `<p>⚠️ Alerta – 83 dias de experiência</p><p>Hoje é o último dia para preencher a 2ª avaliação de experiência na HiBob para o(a) afilhado(a) <b>${nome}</b>.</p><p>Esse registro é essencial para fechar o ciclo de experiência com visão de desempenho, evolução e integração.</p><p>Caso já tenha finalizado, lembre-se de realizar o feedback final com o afilhado(a) antes de completar 90 dias.</p>`;
