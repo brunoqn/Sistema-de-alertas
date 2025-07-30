@@ -1,4 +1,4 @@
-// VERSÃO FINAL COMPLETA - Ciclo de Vida com Data de Conclusão da Coluna Q
+// VERSÃO FINAL COMPLETA 
 
 function executarAlerta() {
   const planilha = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
